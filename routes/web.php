@@ -27,4 +27,4 @@ dd(Auth::user());
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::get('/products',[App\Http\Controllers\ProductController::class,'index']);
+Route::get('/products',[App\Http\Controllers\ProductController::class,'index'])->middleware('auth');
