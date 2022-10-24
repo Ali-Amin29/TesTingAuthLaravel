@@ -15,7 +15,7 @@
             <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Email address</label>
             <input type="email" class="form-control" name="email" id="exampleInputEmail1"
-                value="{{  old('email')? old('email') :  'welcom Enter Email' }}" />
+                value="{{  old('email')? old('email') :  'WelcomEnterYourEmail' }}" />
             @error('email')
                 <span>{{ $message }}</span>
             @enderror
