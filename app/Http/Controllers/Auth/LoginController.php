@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\Validator;
 class LoginController extends Controller
 {
     /*
@@ -40,5 +43,24 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         return view('auth.loginForm');
+    }
+    public function login (Request $request)
+    {
+        $request->validate(
+            [
+                'email'=>'required|email|exists:users,email',
+                'password'=>'required|min:5|max:255'
+            ]
+            );
+            // dd('ali done');
+            if(Auth::attempt(['email' => $request->email , 'password' => $request->password ]))
+            {
+                // dd(Auth::user());
+                return redirect()->route('home');
+            }else
+            {
+                return back()->withInput(['email'=>$request->email])
+                ->withErrors(['email'=>'Not Valid Email']);
+            }
     }
 }
